@@ -4,29 +4,30 @@ function mp = IEGS_E30G20
     mp.convert.G2P = 0.01035;  % sm3 2 mwh
 
     %% -----------------------------------------
-      %                   µçÁ¦ÏµÍ³Êı¾İ
+      %                   ç”µåŠ›ç³»ç»Ÿæ•°æ®
      %-------------------------------------------------
-    % ±êçÛÖµ
+    % æ ‡å¹ºå€¼
     mp.PS.baseMVA = 100;
-    % ¸ººÉ½Úµã
+    % è´Ÿè·èŠ‚ç‚¹
     mp.PS.LoadNode = [3;5;7;8;12;16;19;21;24;30];
-    % ×Ü¸ººÉ
+    % æ€»è´Ÿè·
     mp.PS.Load = [302.2,295.3,289.5,285.4,278.8,281.9,281.6,290.8,305.8,328.4,343.4,353.4,360.9,363.5,366,376,380,367,365,355.9,354.4,340.9,300.8,293.8];
-    % ¸ººÉ·ÖÅä
+    mp.PS.Load = mp.PS.Load .* 1.1; % æ¯”ä¾‹æé«˜
+    % è´Ÿè·åˆ†é…
     mp.PS.LoadFactor = [0.09231,0.12871,0.09552,0.08736,0.09668,0.0894,0.10163,0.1092,0.10309,0.0961];
     % [31.7,44.2,32.8,30,33.2,30.7,34.9,37.5,35.4,33];
     
-    % »ú×éĞÅÏ¢
-    % È¼Æø»ú×é ÊÛµç ¹ºÆø Á½¸ö½ÇÉ« Éç»á¸£ÀûÊÇ·ñÒª¿¼ÂÇ£¿
+    % æœºç»„ä¿¡æ¯
+    % ç‡ƒæ°”æœºç»„ å”®ç”µ è´­æ°” ä¸¤ä¸ªè§’è‰² ç¤¾ä¼šç¦åˆ©æ˜¯å¦è¦è€ƒè™‘ï¼Ÿ
     % node max min
     % cost
     % a*x^2 + b*x + c
     % a + b + c
     mp.PS.CoalGen = [
         1   140	  0;
-        2   80	  0;
-        27	60	  0;
-        23	60   0;
+        2   100	  0;
+        27	100	  0;
+        23	100   0;
         %13  55  0;  % gas
         %22  55  0;  % gas
     ];
@@ -41,8 +42,8 @@ function mp = IEGS_E30G20
     ];
 
     mp.PS.GasGen = [
-        13  55  0;  % gas
-        22  55  0;  % gas
+        13  60  0;  % gas
+        22  60  0;  % gas
     ];
 
     mp.PS.GasCost = [
@@ -50,13 +51,13 @@ function mp = IEGS_E30G20
         0.0625, 1,  0;  % gas
     ];
 
-    % È¼Æø»ú×éĞ§ÂÊ£¬¿¼ÂÇÄÜÁ¿×ª»»
+    % ç‡ƒæ°”æœºç»„æ•ˆç‡ï¼Œè€ƒè™‘èƒ½é‡è½¬æ¢
     mp.PS.GFU = [
         0.52;
         0.54;
     ];
 
-    % ÏßÂ·²ÎÊı£¬ÏßÂ·ÈİÁ¿
+    % çº¿è·¯å‚æ•°ï¼Œçº¿è·¯å®¹é‡
     % f t x rate
     mp.PS.branch = [
             1	2	0.06    130;
@@ -104,14 +105,14 @@ function mp = IEGS_E30G20
             
             ];
     %% --------------------------------------------------------
-    %                   ÌìÈ»ÆøÏµÍ³Êı¾İ
+    %                   å¤©ç„¶æ°”ç³»ç»Ÿæ•°æ®
     % ---------------------------------------------------------
     
     % 10^6 sm3
     % ($/SM3)
     mp.GAS.baseSM3 = 10^6;
 
-    % ÌìÈ»Æø¸ººÉ²ÎÊı
+    % å¤©ç„¶æ°”è´Ÿè·å‚æ•°
     mp.GAS.GasNode = [
        1     0         0         77
        2     0        0         77
@@ -138,7 +139,7 @@ function mp = IEGS_E30G20
     mp.GAS.LoadNode = [3,4,6,7,10,12,15,16,19,20];
     mp.GAS.Load = [40000;34000;31000;32500;37000;42800;42200;47000;50000;51500;49500;49500;48400;45000;45500;44000;48400;50500;52600;54500;53000;52000;49000;46000]';   
     mp.GAS.LoadFactor = [0.09231,0.12871,0.09552,0.08736,0.09668,0.0894,0.10163,0.1092,0.10309,0.0961];
-    % ÌìÈ»ÆøÍøÂç²ÎÊı
+    % å¤©ç„¶æ°”ç½‘ç»œå‚æ•°
     %  f t Capacity C_ij^2
     mp.GAS.Pipeline = [
         1   2   0.6  36.2908;
@@ -148,7 +149,7 @@ function mp = IEGS_E30G20
         4   14  0.6  0.6596;
         5   6   0.6  0.1002;
         7   6   0.6  0.1486;
-        %8   9    0.6   9.1347;  % Ñ¹Ëõ»ú
+        %8   9    0.6   9.1347;  % å‹ç¼©æœº
         9   10   0.6  1.4623;
         10  11  0.4  1.8269;
         11  12  0.4  0.8638;
@@ -157,17 +158,17 @@ function mp = IEGS_E30G20
         14  15  0.4  3.6281;
         15  16  0.4  1.4512;
         11  17  0.4  0.0514;
-        %17   18   0.4   0.064;      % Ñ¹Ëõ»ú       
-        18  19  0.4  0.00170; % ¸Ä¶¯£º0.0017
+        %17   18   0.4   0.064;      % å‹ç¼©æœº       
+        18  19  0.4  0.00170; % æ”¹åŠ¨ï¼š0.0017
         19  20  0.4  0.0278;
                     ];
-    % Ñ¹Ëõ»ú
+    % å‹ç¼©æœº
     mp.GAS.Compressor = [
-        8    9    30   9.1347  % Ñ¹Ëõ»úÖ§Â·
-        17   18   10   0.064   % Ñ¹Ëõ»úÖ§Â·
+        8    9    30   9.1347  % å‹ç¼©æœºæ”¯è·¯
+        17   18   10   0.064   % å‹ç¼©æœºæ”¯è·¯
     ];
 
-    % ÌìÈ»Æø¹©Ó¦
+    % å¤©ç„¶æ°”ä¾›åº”
     % node min max
     mp.GAS.GasSource = [
         1   0       0.3
@@ -178,25 +179,25 @@ function mp = IEGS_E30G20
         14  0       0.2;
     ];
 
-    % ÌìÈ»Æø¹©Ó¦³É±¾
+    % å¤©ç„¶æ°”ä¾›åº”æˆæœ¬
     mp.GAS.Cost = [
-        0.2;
-        0.21;
-        0.17;
-        0.23;
-        0.16;
-        0.18;
+        0.06;
+        0.061;
+        0.054;
+        0.081;
+        0.071;
+        0.075;
     ];
 
     %% -----------------------------------------------------------
-    %                       ñîºÏÊı¾İ
+    %                       è€¦åˆæ•°æ®
     %-------------------------------------------------------------
-    mp.GAS.GFUNode = [5, 18];   % GFUÌìÈ»Æø½Úµã
-    mp.GAS.G2P = [0,5,5,5]; % ¸ººÉ²àñîºÏ
-    mp.GAS.EtaGas = [0.4, 0.45, 0.5];    % ¸ººÉ²à±¨¼Û×ª»»Ïà¹ØÊı¾İ
+    mp.GAS.GFUNode = [5, 18];   % GFUå¤©ç„¶æ°”èŠ‚ç‚¹
+    mp.GAS.G2P = [0,3,3,3]; % è´Ÿè·ä¾§è€¦åˆ
+    mp.GAS.EtaGas = [0.4, 0.45, 0.5];    % è´Ÿè·ä¾§æŠ¥ä»·è½¬æ¢ç›¸å…³æ•°æ®
 
     %% --------------------------------------------------------
-    %                       ±êçÛ»¯
+    %                       æ ‡å¹ºåŒ–
     % --------------------------------------------------------
     mp.PS.branch(:,4) = mp.PS.branch(:,4) / mp.PS.baseMVA;
     mp.PS.CoalGen(:,2) = mp.PS.CoalGen(:,2) / mp.PS.baseMVA;
@@ -209,36 +210,38 @@ function mp = IEGS_E30G20
     
 
     %% --------------------------------------------------------
-    %                   ¸ººÉ±¨¼Û
-    % ---------------------------------------------------------
+    %                   è´Ÿè·æŠ¥ä»·
+    % -----------------------------------------------------------------
     
-    Price = 10./ mp.GAS.EtaGas; % ¼ÙÉè¼Û¸ñ($/MWh)
+    Price = 3.1 ./ mp.GAS.EtaGas; % å‡è®¾ä»·æ ¼($/MWh)    3.2 better
     
-    % ½Úµã¸ººÉ
+    % èŠ‚ç‚¹è´Ÿè·
     LoadInNode_PS = mp.PS.Load .* mp.PS.LoadFactor';
     LoadInNode_GAS = mp.GAS.Load .* mp.GAS.LoadFactor';
     
-    % µç±¨¼Û($/MWh)
-    mp.PS.LoadBidding = BiddingPS(Price, LoadInNode_PS, mp.GAS.G2P / mp.PS.baseMVA);
+    % ç”µæŠ¥ä»·($/MWh)
+    mp.PS.LoadBidding = BiddingPS(Price, LoadInNode_PS, mp.GAS.G2P, mp.PS.baseMVA);
 
     % Gas
-    mp.GAS.LoadBidding = BiddingGAS(Price, LoadInNode_GAS, mp.GAS.G2P, mp.GAS.EtaGas, mp.convert.P2G, mp.GAS.baseSM3);
+    [mp.GAS.LoadBidding, mp.GAS.Price] = BiddingGAS(Price, LoadInNode_GAS, mp.GAS.G2P, mp.GAS.EtaGas, mp.convert.P2G, mp.GAS.baseSM3);
 
 
 end
 
-function B = BiddingPS(Price, E_Load, G2PofLoad)
+function B = BiddingPS(Price, E_Load, G2PofLoad, baseMVA)
+    % æ ‡å¹ºå€¼ * baseMVA (xåæ ‡)
     % scatter(mp.ps.LoadBidding{1,1}(1:2:7),mp.ps.LoadBidding{1,1}(2:2:8))
-    % ¼ÆËãµçÁ¦±¨¼ÛÇúÏß£¬·µ»Ø(x,y)(x1,y1)(x2,y2)µÄĞÎÊ½
+    % è®¡ç®—ç”µåŠ›æŠ¥ä»·æ›²çº¿ï¼Œè¿”å›(x,y)(x1,y1)(x2,y2)çš„å½¢å¼
     [XShape, YShape] = size(E_Load);
+    E_Load = E_Load .* baseMVA; % æœ‰åå€¼ MW
     B = cell(XShape, YShape);
-    X = cell(1,4);   % ´æ´¢±¨¼ÛµÄxÖáÊı¾İ£¬Óë·Ö¶ÎÓĞ¹Ø
-    X{1} = E_Load - ones(XShape, YShape) .* sum(G2PofLoad(:,2:4),2);
-    X{2} = E_Load - ones(XShape, YShape) .* sum(G2PofLoad(:,3:4),2);
-    X{3} = E_Load - ones(XShape, YShape) .* G2PofLoad(:,4);
+    X = cell(1,4);   % å­˜å‚¨æŠ¥ä»·çš„xè½´æ•°æ®ï¼Œä¸åˆ†æ®µæœ‰å…³
+    X{1} = E_Load - ones(XShape, YShape) .* sum(G2PofLoad(:,2:4),2);    % MW
+    X{2} = E_Load - ones(XShape, YShape) .* sum(G2PofLoad(:,3:4),2);    % MW
+    X{3} = E_Load - ones(XShape, YShape) .* G2PofLoad(:,4); % MW
     X{4} = E_Load;
-    % ¼ÆËãy
-    Y = cell(1,4);  % ´æ´¢±¨¼ÛµÄyÖáÊı¾İ£¬Óë·Ö¶ÎÓĞ¹Ø
+    % è®¡ç®—y
+    Y = cell(1,4);  % å­˜å‚¨æŠ¥ä»·çš„yè½´æ•°æ®ï¼Œä¸åˆ†æ®µæœ‰å…³
     Y{1} = X{1} .* Price(1);
     Y{2} = (X{2}-X{1}) .* Price(1) + Y{1};
     Y{3} = (X{3}-X{2}) .* Price(2) + Y{2};
@@ -251,11 +254,12 @@ function B = BiddingPS(Price, E_Load, G2PofLoad)
             end
         end
     end
+    % $/MWh
 end
 
-function B = BiddingGAS(Price, G_Load, G2PofLoad, mu, conv, baseSM3)
-    % ÌìÈ¼Æø±¨¼ÛÇúÏß
-    % ¼ÆËã±¨¼ÛÇúÏß£¬·µ»Ø(x,y)(x1,y1)(x2,y2)µÄĞÎÊ½
+function [B, Price] = BiddingGAS(Price, G_Load, G2PofLoad, mu, conv, baseSM3)
+    % å¤©ç‡ƒæ°”æŠ¥ä»·æ›²çº¿
+    % è®¡ç®—æŠ¥ä»·æ›²çº¿ï¼Œè¿”å›(x,y)(x1,y1)(x2,y2)çš„å½¢å¼
     
     G2PofLoad(:,2:4) = G2PofLoad(:,2:4) ./ mu * conv;   % ($/sm3)
     G2PofLoad= G2PofLoad / baseSM3; % ($/10^6sm3)
@@ -265,13 +269,13 @@ function B = BiddingGAS(Price, G_Load, G2PofLoad, mu, conv, baseSM3)
     
     [XShape, YShape] = size(G_Load);
     B = cell(XShape, YShape);
-    X = cell(1,4);   % ´æ´¢±¨¼ÛµÄxÖáÊı¾İ£¬Óë·Ö¶ÎÓĞ¹Ø
+    X = cell(1,4);   % å­˜å‚¨æŠ¥ä»·çš„xè½´æ•°æ®ï¼Œä¸åˆ†æ®µæœ‰å…³
     X{1} = G_Load;
     X{2} = G_Load + ones(XShape, YShape) .* G2PofLoad(:,4);
     X{3} = G_Load + ones(XShape, YShape) .* sum(G2PofLoad(:,3:4),2);
     X{4} = G_Load + ones(XShape, YShape) .* sum(G2PofLoad(:,2:4),2);
-    % ¼ÆËãy
-    Y = cell(1,4);  % ´æ´¢±¨¼ÛµÄyÖáÊı¾İ£¬Óë·Ö¶ÎÓĞ¹Ø
+    % è®¡ç®—y
+    Y = cell(1,4);  % å­˜å‚¨æŠ¥ä»·çš„yè½´æ•°æ®ï¼Œä¸åˆ†æ®µæœ‰å…³
     Y{1} = X{1} .* Price(3);
     Y{2} = (X{2}-X{1}) .* Price(3) + Y{1};
     Y{3} = (X{3}-X{2}) .* Price(2) + Y{2};
